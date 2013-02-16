@@ -1,0 +1,140 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/*font-family: 'Nixie One';*/
+
+#container {
+	padding: 1%;
+	width: 94%;
+}
+
+#containus {
+	padding: 1%;
+	width: 98%;
+}
+
+#background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -3;
+	min-width: auto;
+	min-height: 100%;
+	width: 100%;
+	height: auto;
+}
+
+#navigation{
+	font-family: 'Nixie One';
+	text-align: right;
+	margin: 9% 30% 0% 0%;
+	width: 100%;
+	height: 15%;
+}
+
+#logo {
+	position: absolute;
+	top: -2px;
+	left: -5px;
+	z-index: 0;
+	height: 49%;
+	width: auto;
+	min-height: 25%;
+	margin: 0% 70% 1% 5%;
+}
+
+div #navigation ul{
+	margin: 0% 0% 0% 25%;
+	border-top-style:none;
+	border-right-style:none;
+	border-bottom-style:solid;
+	border-width: 1px;
+	color: #fff;
+	border-left-style:none;
+	padding-bottom: 4px;
+}
+
+div #navigation ul li{
+	list-style: none;
+	display: inline;
+	margin: 0% 2% 0% 0%;
+}
+
+div #navigation ul li a{
+	text-decoration: none;
+	margin: 0% -2% 0% 5%;
+	color: #fff;
+}
+
+div #line {
+	display: block;
+	width: 65%;
+	size: 7px;
+	margin: -1% 5% 0% 31%;
+	color: #9a9c9f;
+}
+
+div #lineus {
+	margin: 0% 15% 0% 10%;
+	width: 50%;
+	color: #9a9c9f;
+}
+
+#headline{
+	font-family: 'Nixie One';
+	text-align: center;
+	z-index: 2;
+	margin: 13% 24% 18% 24%;
+	color: #fff;
+	font-size: 175%;
+}
+
+#bottom{
+	font-family: 'Nixie One';
+	text-align: center;
+	z-index: 3;
+	margin: 0% 3% 20% 70%;
+	padding: 0%;
+	color: #fff;
+	font-size: 125%;
+}
+
+div #links ul li a{
+	text-decoration: none;
+	padding: 0% 0% 0% 0%;
+	margin: 0% 3% 0% 0%;
+	color: #000;
+}
+
+div #links_app {
+	margin: 0% 5% 0% 25%;
+	border-top-style:none;
+	border-right-style:none;
+	border-bottom-style:solid;
+	border-width: 1px;
+	color: #9a9c9f;
+	border-left-style:none;
+}
+
+div #links_app ul li a{
+	text-decoration: none;
+	margin: 0% -2% 0% 5%;
+	color: #9a9c9f;
+}
+
+div #links_app ul li a:hover {
+	text-decoration: none;
+	color: #1e2a6f;
+}
+
+#video {
+	text-align: center;
+	margin: 5% auto 20% auto;
+}
+
+#contact {
+	margin: -18% auto 0% auto;
+	font-family: 'Nixie One';
+	text-decoration: none;
+	text-align: center;
+}

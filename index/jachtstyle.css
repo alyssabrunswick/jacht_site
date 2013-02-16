@@ -1,0 +1,499 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* #### Mobile Phones #### */
+@media (min-width: 220px){
+body{
+	padding: 0;
+	margin: 0;
+	font-family: 'Nixie One';
+}
+
+a img {
+	border: 0;
+}
+
+#background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -3;
+	min-width: auto;
+	min-height: 100%;
+	width: 100%;
+	height: auto;
+}
+
+#navigation{
+	background-color: #ffffff;
+	font-family: 'Nixie One';
+	text-align: right;
+	width: 100%;
+	height: 80px;
+	position: absolute;
+	top: 0;
+	padding: 0% 0% 10px 0%;
+	z-index: 2;
+}
+
+#logo {
+	position: absolute;
+	bottom: -10px;
+	left: 0px;
+	z-index: 0;
+	height: 100%;
+	width: auto;
+	min-height: 5%;
+	margin: 0% 1% 0% 0%;
+}
+
+#navigation ul{
+	position: absolute;
+	bottom: 10px;
+	right: 0;
+	border-top-style:none;
+	border-right-style:none;
+	border-bottom-style:solid;
+	border-left-style:none;
+	border-width: 0px;
+	color: #9a9c9f;
+	width: 80%;
+	margin: 0% 3% 0% 0%;
+	padding-bottom: 3px;
+	font-size: 102%;
+}
+
+#navigation ul li{
+	list-style: none;
+	display: inline;
+	text-align: right;
+}
+
+#navigation ul li a{
+	color: #000;
+	text-decoration: none;
+	padding-left: 2%;	
+}
+
+#Us{
+	margin: 10% 0% 5% 0%;
+}
+
+#video {
+	text-align: center;
+	margin: 30% auto 0% auto;
+}
+.embed-containers {
+	width:100%;
+    position: relative;
+    padding-bottom: 56.25%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+}
+.embed-containers iframe,
+.embed-containers object,
+.embed-containesr embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+}
+
+#description{
+	text-align: justify;
+	width: 99%;
+	margin: 1% auto 1% auto;
+	font-size: 75%;
+}
+
+#Contact{
+	width: 95%;
+	background-color: #00234C;
+	height: 60px;
+	padding: 2% 1% 2% 4%;
+	font-family: 'Nixie One';
+	font-size: 65%;
+	color: #ffffff;
+}
+
+a{
+	font-family: 'Nixie One';
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+#info{
+	width: 45%;
+	float: left;
+}
+
+#info img{
+	float: left;
+	padding: 0% 2% 15% 0%; 
+}
+
+#apply{
+	width: 20%;
+	float: left;
+}
+
+#social{
+	width: 17%;
+	float: left;
+	margin-top:0px;
+}
+
+#social ul li {
+	list-style: none;
+}
+
+#social a{
+	padding: 1% 3% 0% 3%;
+	margin: 0% 0% 0% 0%;
+}
+
+.link_icons{
+	width: 15%;
+	height: auto;
+}
+
+}
+
+
+@media (min-width: 600px){
+body{
+	padding: 0;
+	margin: 0;
+	font-family: 'Nixie One';
+}
+
+#background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -3;
+	min-width: auto;
+	min-height: 100%;
+	width: 100%;
+	height: auto;
+}
+
+#navigation{
+	background-color: #ffffff;
+	font-family: 'Nixie One';
+	text-align: right;
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	top: 0;
+	padding: 0% 0% 10px 0%;
+	z-index: 2;
+}
+
+#logo {
+	position: absolute;
+	bottom: -10px;
+	left: -5px;
+	z-index: 0;
+	height: 112%;
+	width: auto;
+	min-height: 25%;
+	margin: 0% 10% 1% 5%;
+}
+
+#navigation ul{
+	position: absolute;
+	bottom: 10px;
+	right: 0;
+	border-top-style:none;
+	border-right-style:none;
+	border-bottom-style:solid;
+	border-left-style:none;
+	border-width: 1px;
+	color: #9a9c9f;
+	width: 65%;
+	margin: 0% 5% 0% 0%;
+	padding-bottom: 3px;
+}
+
+#navigation ul li{
+	list-style: none;
+	display: inline;
+	text-align: right;
+}
+
+#navigation ul li a{
+	color: #000;
+	text-decoration: none;
+	padding-left: 2%;	
+}
+
+#Us{
+	margin: 5% 0% 5% 0%;
+}
+
+#video {
+	text-align: center;
+	margin: 18% auto 0% auto;
+	z-index: -;
+}
+.embed-containers {
+	width:100%;
+    position: relative;
+    padding-bottom: 56.25%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+}
+.embed-containers iframe,
+.embed-containers object,
+.embed-containers embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 93%;
+}
+
+#description{
+	text-align: justify;
+	width: 99%;
+	margin: 1% auto 1% auto;
+	font-size: 105%;
+}
+
+#Contact{
+	width: 70%;
+	background-color: #00234C;
+	height: 80px;
+	padding: 3% 15% 5% 15%;
+	font-family: 'Nixie One';
+	font-size: 100%;
+	color: #ffffff;
+}
+
+a{
+	font-family: 'Nixie One';
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+#info{
+	width: 48%;
+	float: left;
+}
+
+#info a{
+	color: #9a9c9f;
+}
+
+#info img{
+	float: left;
+	padding: 0% 2% 10% 0%; 
+	margin: 0 0 15% 0;
+}
+
+#apply{
+	width: 34%;
+	float: left;
+}
+
+#social{
+	width: 18%;
+	float: left;
+	padding: 0% 0% 0% 0%;
+	margin: 0% 0% 0% 0%;
+}
+
+#social a{
+	padding: 0% 0% 0% 0%;
+	margin: 0% 0% 0% 5%;
+}
+
+.link_icons{
+	width: 15%;
+	height: auto;
+}
+
+}
+
+/* #### Desktops #### */
+
+@media (min-width: 1024px){
+body{
+	padding: 0;
+	margin: 0;
+	font-family: 'Nixie One';
+	font-weight: normal;
+}
+
+#background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -3;
+	min-width: auto;
+	min-height: 100%;
+	width: 100%;
+	height: auto;
+}
+
+#navigation{
+	background-color: #ffffff;
+	font-family: 'Nixie One';
+	text-align: right;
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	top: 0;
+	padding: 0% 0% 10px 0%;
+	z-index: 2;
+}
+
+#logo {
+	position: absolute;
+	bottom: -10px;
+	left: -5px;
+	z-index: 0;
+	height: 112%;
+	width: auto;
+	min-height: 25%;
+	margin: 0% 0% 1% 10%;
+}
+
+#navigation ul{
+	position: absolute;
+	bottom: 10px;
+	right: 0;
+	border-top-style:none;
+	border-right-style:none;
+	border-bottom-style:solid;
+	border-left-style:none;
+	border-width: 1px;
+	color: #9a9c9f;
+	width: 68%;
+	margin: 0% 10% 0% 0%;
+	padding-bottom: 3px;
+}
+
+#navigation ul li{
+	list-style: none;
+	display: inline;
+	text-align: right;
+}
+
+#navigation ul li a{
+	color: #000;
+	text-decoration: none;
+	padding-left: 2%;	
+}
+
+#Us{
+	margin: 5% 0% 5% 0%;
+}
+
+#video {
+	text-align: center;
+	margin: 10% auto 0% auto;
+	z-index: -;
+}
+.embed-containers {
+	width:100%;
+    position: relative;
+    padding-bottom: 56.25%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: auto;
+    overflow: hidden;
+}
+.embed-containers iframe,
+.embed-containers object,
+.embed-containers embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 96%;
+}
+
+#description{
+	text-align: justify;
+	width: 99%;
+	margin: 1% auto 1% auto;
+	font-size: 100%;
+	padding: 1% 0 0 0;
+}
+
+#Us{
+	display: inline-block;
+}
+
+#Contact{
+	width: 70%;
+	background-color: #00234C;
+	height: 50px;
+	padding: 3% 15% 5% 15%;
+	font-family: 'Nixie One';
+	color: #ffffff;
+	margin-top:5%;
+
+}
+
+a{
+	font-family: 'Nixie One';
+	text-decoration: none;
+	color: #9a9c9f;
+}
+
+#info{
+	width: 45%;
+	float: left;
+}
+
+#info a{
+	color: #9a9c9f;
+}
+
+#info img{
+	float: left;
+	padding: 0% 2% 10% 0%;
+	margin: 0 0 15% 0;
+}
+
+#apply{
+	width: 40%;
+	float: left;
+}
+
+#social{
+	width: 14%;
+	float: left;
+	margin: 0% 0% 0% 0%;
+	padding: 0% 0% 0% 0%;
+	
+}
+
+#social ul li {
+	list-style: none;
+}
+
+#social a{
+	padding: 0% 5% 0% 5%;
+	margin: 0% 0% 0% 0%;
+}
+
+.link_icons{
+	width: 20%;
+	height: auto;
+}
+
+.year{
+	font-family: 'Nixie One';
+	color: black;
+	font-size: large;
+	text-align: left;
+	margin: 3% 0 1% 1%;	
+}
+}
+

@@ -1,0 +1,270 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<title>Upload a file</title>
+
+<script type="text/javascript">
+/* <![CDATA[ */  /* so (X)HTML validators ignore the javascript. */
+var theRequest = false;
+var total_upload_size = 1;
+var forceKB = 0
+
+function goajax(page)
+{
+	theRequest = false;
+
+	if(window.XMLHttpRequest)
+	{
+		theRequest = new XMLHttpRequest();
+		if(theRequest.overrideMimeType)
+		{
+			theRequest.overrideMimeType('text/xml');
+		}
+	}
+	else if(window.ActiveXObject)
+	{
+		try
+		{
+			theRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try
+			{
+				theRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {}
+		}
+	}
+	if(!theRequest)
+	{
+		alert('Error: could not create XMLHTTP object.');
+		return false;
+	}
+
+	theRequest.onreadystatechange = updateProgress;
+	theRequest.open('GET', page, true);
+	theRequest.send(null);
+}
+
+function updateProgress()
+{
+	if(theRequest.readyState == 4)
+	{
+		if(theRequest.status == 200)
+		{
+			var update = new Array();
+			update = theRequest.responseText.split('|');
+			if(update[1] != 0)
+			{
+				total_upload_size = update[1];
+			}
+
+			if(update[3] == 'toobig')
+			{
+				document.getElementById('progressMeter').innerHTML = 'Error: you tried to send ' +
+					format_filesize_with_unit(total_upload_size, ' ', 0) +
+					' (' + total_upload_size + ' bytes), which exceeds the current limit of ' +
+					format_filesize_with_unit(735051776, ' ', 0) +
+					' (735051776 bytes).&nbsp; Hit the stop button in your browser, ' +
+					'then <a href="/cgi-bin/ajaxupload.pl">click here</a> to choose a smaller file.';
+
+				return null;
+			}
+
+			var completed_upload_size = update[0];
+			var elapsedtime = update[2];
+
+			var progressPercent = Math.ceil((completed_upload_size/total_upload_size)*100);
+
+			document.getElementById('progressMeterText').innerHTML = 'upload in progress: ' + progressPercent + '%';
+
+			document.getElementById('progressMeterBarDone').style.width = parseInt(progressPercent*3.5) + 'px';
+
+
+			var totaltime = parseInt((elapsedtime * 100) / progressPercent);
+			var totaltime_forprint = format_timespan_with_unit(totaltime, '&nbsp;');
+			var remainingtime_forprint = format_timespan_with_unit(eval(totaltime - elapsedtime), '&nbsp;');
+			var elapsedtime_forprint = format_timespan_with_unit(elapsedtime, '&nbsp;');
+
+			var force_MB = total_upload_size > 999999 ? 1 : 0;
+			var total_upload_size_forprint = format_filesize_with_unit(total_upload_size, '&nbsp;', force_MB);
+			var remaining_upload_size_forprint = format_filesize_with_unit(total_upload_size - completed_upload_size, '&nbsp;', force_MB);
+			var completed_upload_size_forprint = format_filesize_with_unit(completed_upload_size, '&nbsp;', force_MB);
+
+			var transfer_rate = format_filesize_with_unit(completed_upload_size/elapsedtime, '&nbsp;', force_MB);
+
+			document.getElementById('donet').innerHTML = elapsedtime_forprint;
+			document.getElementById('dones').innerHTML = completed_upload_size_forprint;
+
+			document.getElementById('leftt').innerHTML = remainingtime_forprint;
+			document.getElementById('lefts').innerHTML = remaining_upload_size_forprint;
+
+			document.getElementById('totalt').innerHTML = totaltime_forprint;
+			document.getElementById('totals').innerHTML = total_upload_size_forprint;
+
+			document.getElementById('transferRate').innerHTML = 'uploading data at: ' + transfer_rate + '/s';
+
+
+			window.setTimeout("goajax('/cgi-bin/ajaxupload.pl?serial=ccc7aad3308e001a&action=get_progress_and_size')", 700);
+		}
+		else
+		{
+			alert('Error: got a not-OK status code...');
+		}
+	}
+
+}
+
+function startprogress()
+{
+	document.getElementById('progressMeter').style.display = 'block';
+	document.getElementById('progressMeterText').innerHTML = 'upload in progress: 0%';
+	document.getElementById('uploadbutton').disabled = true;
+	document.getElementById('uploadfilefield').readonly = true;
+	window.setTimeout("goajax('/cgi-bin/ajaxupload.pl?serial=ccc7aad3308e001a&action=get_progress_and_size')", 1200);
+}
+
+function format_filesize_with_unit(num,space,forceMB)
+{
+	var unit;
+	if(   ((num > 999999)  ||  forceMB)   &&   !forceKB)
+	{
+		num = num/(1024*1024);
+		num = num.toString();
+
+		// note extra escaping necessary since we're printing this JS code from Perl...
+		var testnum = num.replace( /^(\d+\.\d).*/, '$1' ); // show 1 decimal place.
+
+		if(testnum == '0.0')
+		{
+			testnum = num.replace( /^(\d+\.\d\d).*/, '$1' ); // show 2 decimal places.
+		}
+		if(testnum == '0.00')
+		{
+			testnum = num.replace( /^(\d+\.\d\d\d).*/, '$1' ); // show 3 decimal places.
+		}
+		num = testnum;
+
+		unit = 'MB';
+	}
+	else
+	{
+		num = parseInt(num/(1024));
+		unit = 'KB';
+	}
+	return num + space + unit;
+}
+
+function format_timespan_with_unit(num,space)
+{
+	var unit;
+	if(num >= (60*60))
+	{
+		var secs_left = num % (60*60);
+		var mins_left = secs_left / 60;
+		mins_left = mins_left.toString();
+		// note extra escaping necessary since we're printing this JS code from Perl...
+		mins_left = mins_left.replace( /^(\d+)\..*/, '$1' ); // show no decimal places.
+		mins_left = mins_left.replace( /^(\d)$/, '0$1' ); // for single-digits, prepend a zero.
+
+		num = num/(60*60);
+		num = num.toString();
+		// note extra escaping necessary since we're printing this JS code from Perl...
+		num = num.replace( /^(\d+)\..*/, '$1' ); // show no decimal places.
+
+		num = num + space + 'h' + space + mins_left + space + 'm';
+		space = '';
+		unit = '';
+	}
+	else if(num >= 60)
+	{
+		var secs_left = num % 60;
+		secs_left = secs_left.toString().replace( /^(\d)$/, '0$1' ); // for single-digits, prepend a zero.
+
+		num = num/60;
+		num = num.toString();
+		// note extra escaping necessary since we're printing this JS code from Perl...
+		num = num.replace( /^(\d+)\..*/, '$1' ); // show no decimal places.
+		num = num.replace( /^(\d)$/, '0$1' ); // for single-digits, prepend a zero.
+
+		num = num + space + 'm' + space + secs_left + space + 's';
+		space = '';
+		unit = '';
+	}
+	else
+	{
+		unit = 's';
+	}
+	return num + space + unit;
+}
+
+/* ]]> */  /* so (X)HTML validators ignore the javascript. */
+</script>
+
+
+<style type="text/css">
+body { background: #F1F0ED; font-family: sans-serif; text-align: center; }
+#pb { margin: 14px auto 2px auto; padding: 3px; font-size: 80%; }
+#pb a { color: #000; }
+#pb a:hover { color: #aaa; }
+#footer { color: #aaa; margin: 24px auto 4px auto; }
+a { color: #2222bb; }
+a:hover { color: #aaa; }
+#filelist a:link { color: #2222bb; }
+#filelist a:visited { color: #000; }
+#filelist a:hover { color: #aaa; }
+#progMeterContainer { margin: 15px auto; width: 600px; background: white; border: 1px solid #999; padding: 10px; }
+#progMeterContainer #title { font-size: 200%; font-weight: bold; padding: 8px; }
+#progMeterContainer #intro { font-size: 90%; text-align: justify; margin-bottom: 15px; }
+#progressMeter { padding-top: 15px; }
+#progressMeterBar { margin: 2px auto; width: 350px; height: 20px; border: 1px inset; background: #eee; text-align: left; }
+#progressMeterBarDone1 { width: 0; height: 20px; border-right: 1px solid #444; background: url(/layout/ajaxupload-scrolling-bg-08.gif) repeat-x; }
+#progressMeterBarDone { width: 0; height: 20px; border-right: 1px solid #444; background: #6953b2; }
+#progressMeter table { width: 350px; margin: 20px auto; text-align: right; border-collapse: collapse; border: 0; border-bottom: 1px solid #bbb;}
+#progressMeter table td { border-top: 1px solid #bbb; text-align: center; }
+#progressMeter #upload-row-1, #progressMeter #upload-row-3 { background: #e6e6e6; }
+#progressMeter #upload-row-2 { background: #efefef; }
+#transferRate { font-style: italic; }
+td.headercell { font-weight: bold; }
+#tca1,#tcb1,#tcc1 { width: 14%; }
+#tca2,#donet,#dones { width: 29%; }
+#tca3,#leftt,#lefts { width: 28%; }
+#tca4,#totalt,#totals { width: 29%; }
+#filelist { text-align: left; }
+</style>
+
+</head>
+<body>
+<div id="progMeterContainer">
+
+<div id="title">UNL DropBox</div>
+<form name="theuploadform" method="post" onsubmit="startprogress()" enctype="multipart/form-data" action="/cgi-bin/ajaxupload.pl?serial=ccc7aad3308e001a">
+
+File to upload:
+<br /><br /><input type="file" name="uploadname" id="uploadfilefield" size="42" />
+<br /><br /><input type="submit" value="begin upload" id="uploadbutton" />
+</form>
+
+<div id="progressMeter" style="display: none;">
+<div id="progressMeterText"></div>
+<div id="progressMeterBar">
+	<div id="progressMeterBarDone"></div>
+</div>
+
+<div id="transferRate">uploading data at: ?</div>
+
+<table>
+<tr id="upload-row-1"><td id="tca1"></td><td id="tca2" class="headercell">Completed</td><td id="tca3" class="headercell">Remaining</td><td id="tca4" class="headercell">Total</td></tr>
+<tr id="upload-row-2"><td id="tcb1" class="headercell">Time</td><td id="donet">0</td><td id="leftt">?</td><td id="totalt">?</td></tr>
+<tr id="upload-row-3"><td id="tcc1" class="headercell">Size</td><td id="dones">0</td><td id="lefts">?</td><td id="totals">?</td></tr>
+</table>
+
+</div>
+<div id="footer">
+<a href="javascript:window.close();">Close</a></div>
+<div id="pb">
+<a href="http://encodable.com/tech/ajaxupload/" target="_blank">Powered by Encodable</a></div>
+
+</div>
+</body>
+</html>
